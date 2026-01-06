@@ -1,0 +1,19 @@
+DESCRIPTION >
+    Track request volume over time (hourly buckets)
+
+NODE hourly_volume_node
+DESCRIPTION >
+    Aggregate requests into hourly buckets
+
+SQL >
+    SELECT
+        toStartOfHour(timestamp) AS hour,
+        count() AS request_count,
+        uniqExact(host) AS unique_hosts,
+        uniqExact(bundle_id) AS unique_apps
+    FROM tracking_events
+    WHERE timestamp >= now() - INTERVAL 7 DAY
+    GROUP BY hour
+    ORDER BY hour DESC
+
+TYPE endpoint

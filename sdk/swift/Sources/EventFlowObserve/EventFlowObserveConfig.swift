@@ -32,6 +32,10 @@ public struct EventFlowObserveConfig: Sendable {
     /// When set, all captured requests will be batched and sent to the specified URL.
     public var remoteLogging: RemoteLoggerConfig?
 
+    /// Optional configuration for sending captured requests to TinyBird.
+    /// When set, all captured requests will be batched and sent to your TinyBird datasource.
+    public var tinyBirdLogging: TinyBirdLoggerConfig?
+
     public init(
         debugMode: Bool = false,
         allowedDomains: [String] = [],
@@ -41,7 +45,8 @@ public struct EventFlowObserveConfig: Sendable {
         samplingRate: Double = 1.0,
         schemes: Set<String> = ["http", "https"],
         swizzleSessionConfiguration: Bool = true,
-        remoteLogging: RemoteLoggerConfig? = nil
+        remoteLogging: RemoteLoggerConfig? = nil,
+        tinyBirdLogging: TinyBirdLoggerConfig? = nil
     ) {
         self.debugMode = debugMode
         self.allowedDomains = allowedDomains
@@ -52,6 +57,7 @@ public struct EventFlowObserveConfig: Sendable {
         self.schemes = schemes
         self.swizzleSessionConfiguration = swizzleSessionConfiguration
         self.remoteLogging = remoteLogging
+        self.tinyBirdLogging = tinyBirdLogging
     }
 
     /// Default configuration that captures all HTTP/HTTPS traffic including from third-party SDKs

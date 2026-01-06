@@ -1,0 +1,13 @@
+`id` String,
+`timestamp` DateTime64(3),
+`url` String,
+`method` String,
+`host` String,
+`path` String,
+`headers` String,
+`body` Nullable(String),
+`bundle_id` String,
+`app_version` String,
+`app_build` String,
+`device_model` String,
+`os_version` String

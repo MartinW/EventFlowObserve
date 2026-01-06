@@ -1,0 +1,27 @@
+DESCRIPTION >
+    Discover unique hosts, paths, and patterns from captured events
+
+NODE unique_hosts
+DESCRIPTION >
+    Extract all unique destination hosts
+
+SQL >
+    SELECT DISTINCT host
+    FROM tracking_events
+    ORDER BY host
+
+NODE unique_paths_by_host
+DESCRIPTION >
+    Extract unique paths grouped by host
+
+SQL >
+    SELECT
+        host,
+        groupArray(DISTINCT path) AS paths,
+        count() AS total_requests
+    FROM tracking_events
+    WHERE timestamp >= now() - INTERVAL 7 DAY
+    GROUP BY host
+    ORDER BY total_requests DESC
+
+TYPE endpoint

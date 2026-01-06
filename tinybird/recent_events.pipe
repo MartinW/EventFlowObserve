@@ -1,0 +1,33 @@
+DESCRIPTION >
+    Retrieve the most recent events with optional filtering
+
+NODE recent_events_node
+DESCRIPTION >
+    Get recent events with optional host filter
+
+SQL >
+    %
+    SELECT
+        id,
+        timestamp,
+        method,
+        host,
+        path,
+        url,
+        body,
+        bundle_id,
+        app_version,
+        device_model,
+        os_version
+    FROM tracking_events
+    WHERE 1=1
+    {% if defined(host_filter) %}
+        AND host LIKE {{ String(host_filter, '%') }}
+    {% end %}
+    {% if defined(method_filter) %}
+        AND method = {{ String(method_filter, 'POST') }}
+    {% end %}
+    ORDER BY timestamp DESC
+    LIMIT {{ Int32(limit, 100) }}
+
+TYPE endpoint

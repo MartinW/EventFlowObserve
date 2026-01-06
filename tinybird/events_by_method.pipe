@@ -1,0 +1,18 @@
+DESCRIPTION >
+    Aggregate events by HTTP method
+
+NODE events_by_method_node
+DESCRIPTION >
+    Group events by HTTP method
+
+SQL >
+    SELECT
+        method,
+        count() AS request_count,
+        uniqExact(host) AS unique_hosts
+    FROM tracking_events
+    WHERE timestamp >= now() - INTERVAL 7 DAY
+    GROUP BY method
+    ORDER BY request_count DESC
+
+TYPE endpoint

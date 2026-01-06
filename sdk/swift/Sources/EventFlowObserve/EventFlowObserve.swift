@@ -31,6 +31,9 @@ public final class EventFlowObserve: @unchecked Sendable {
     /// Remote logger for sending captured requests to an endpoint
     private var remoteLogger: RemoteLogger?
 
+    /// TinyBird logger for sending captured requests to TinyBird
+    private var tinyBirdLogger: TinyBirdLogger?
+
     private init() {}
 
     // MARK: - Public API
@@ -58,6 +61,12 @@ public final class EventFlowObserve: @unchecked Sendable {
             log("Remote logging enabled to: \(remoteConfig.endpointURL)")
         }
 
+        // Initialize TinyBird logger if configured
+        if let tinyBirdConfig = config.tinyBirdLogging {
+            tinyBirdLogger = TinyBirdLogger(config: tinyBirdConfig)
+            log("TinyBird logging enabled to datasource: \(tinyBirdConfig.datasource)")
+        }
+
         isActive = true
 
         log("EventFlowObserve started with config: debugMode=\(config.debugMode), schemes=\(config.schemes), swizzle=\(config.swizzleSessionConfiguration)")
@@ -74,6 +83,10 @@ public final class EventFlowObserve: @unchecked Sendable {
         remoteLogger?.flush()
         remoteLogger = nil
 
+        // Flush any pending TinyBird logs
+        tinyBirdLogger?.flush()
+        tinyBirdLogger = nil
+
         URLProtocol.unregisterClass(EventFlowObserveProtocol.self)
 
         // Restore original URLSessionConfiguration behavior
@@ -89,6 +102,7 @@ public final class EventFlowObserve: @unchecked Sendable {
     /// Manually flush any pending requests to the remote endpoint
     public func flushRemoteLogs() {
         remoteLogger?.flush()
+        tinyBirdLogger?.flush()
     }
 
     /// Register a handler to receive captured requests
@@ -153,6 +167,9 @@ public final class EventFlowObserve: @unchecked Sendable {
 
         // Send to remote endpoint if configured
         remoteLogger?.log(request)
+
+        // Send to TinyBird if configured
+        tinyBirdLogger?.log(request)
 
         // Notify handlers
         handlerLock.lock()

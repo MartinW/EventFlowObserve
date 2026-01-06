@@ -1,0 +1,21 @@
+DESCRIPTION >
+    Aggregate events by destination host with request counts
+
+NODE events_by_host_node
+DESCRIPTION >
+    Group events by host and count requests
+
+SQL >
+    SELECT
+        host,
+        count() AS request_count,
+        countIf(method = 'POST') AS post_count,
+        countIf(method = 'GET') AS get_count,
+        min(timestamp) AS first_seen,
+        max(timestamp) AS last_seen
+    FROM tracking_events
+    WHERE timestamp >= now() - INTERVAL 7 DAY
+    GROUP BY host
+    ORDER BY request_count DESC
+
+TYPE endpoint

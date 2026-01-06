@@ -98,6 +98,29 @@ let config = EventFlowObserveConfig(
 EventFlowObserve.shared.start(config: config)
 ```
 
+### TinyBird Integration
+
+Send captured requests to TinyBird for real-time analytics:
+
+```swift
+let tinyBirdConfig = TinyBirdLoggerConfig(
+    datasource: "tracking_events",
+    authToken: "p.your_write_only_token",
+    region: .eu,  // or .us
+    batchSize: 10,
+    flushInterval: 30
+)
+
+let config = EventFlowObserveConfig(
+    debugMode: true,
+    tinyBirdLogging: tinyBirdConfig
+)
+
+EventFlowObserve.shared.start(config: config)
+```
+
+See [tinybird/README.md](../../tinybird/README.md) for TinyBird project setup instructions.
+
 ### Accessing Captured Requests
 
 ```swift

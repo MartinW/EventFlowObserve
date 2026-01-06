@@ -1,0 +1,24 @@
+DESCRIPTION >
+    Raw tracking events captured from iOS app network traffic by EventFlowObserve SDK
+
+TOKEN ios_sdk_write APPEND
+
+SCHEMA >
+    `id` String `json:$.id`,
+    `timestamp` DateTime64(3) `json:$.timestamp`,
+    `url` String `json:$.url`,
+    `method` String `json:$.method`,
+    `host` String `json:$.host`,
+    `path` String `json:$.path`,
+    `headers` String `json:$.headers`,
+    `body` Nullable(String) `json:$.body`,
+    `bundle_id` String `json:$.bundle_id`,
+    `app_version` String `json:$.app_version`,
+    `app_build` String `json:$.app_build`,
+    `device_model` String `json:$.device_model`,
+    `os_version` String `json:$.os_version`
+
+ENGINE "MergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(timestamp)"
+ENGINE_SORTING_KEY "timestamp, host, method"
+ENGINE_TTL "toDateTime(timestamp) + toIntervalDay(90)"

@@ -1,0 +1,14 @@
+{
+    "host": "https://api.europe-west2.gcp.tinybird.co",
+    "id": "8f10bee4-8152-437d-80d2-977a92b9b073",
+    "name": "eventflow_observe",
+    "scope": "user",
+    "token": "p.eyJ1IjogIjhmMTBiZWU0LTgxNTItNDM3ZC04MGQyLTk3N2E5MmI5YjA3MyIsICJpZCI6ICI2M2RjNWY4YS0zNjliLTRjZTMtYjI5NC0xNzc0NzZmM2Q5YWMiLCAiaG9zdCI6ICJnY3AtZXVyb3BlLXdlc3QyIn0.ju7ksVaJDWfe5Vn2MzWHH2XeLF91ZkyzuEEFmkb8rZU",
+    "tokens": {
+        "https://api.europe-west2.gcp.tinybird.co": "p.eyJ1IjogIjhmMTBiZWU0LTgxNTItNDM3ZC04MGQyLTk3N2E5MmI5YjA3MyIsICJpZCI6ICI2M2RjNWY4YS0zNjliLTRjZTMtYjI5NC0xNzc0NzZmM2Q5YWMiLCAiaG9zdCI6ICJnY3AtZXVyb3BlLXdlc3QyIn0.ju7ksVaJDWfe5Vn2MzWHH2XeLF91ZkyzuEEFmkb8rZU"
+    },
+    "user_email": "martin.wright@evergreenapps.co.uk",
+    "user_id": "63730d22-3bbe-4632-9064-21dd860082b5",
+    "user_token": "p.eyJ1IjogIjYzNzMwZDIyLTNiYmUtNDYzMi05MDY0LTIxZGQ4NjAwODJiNSIsICJpZCI6ICJlMzE0YTk5OS00ZmFkLTQ3NDEtOWZhNC0zNzdlNjQ4ZjJjZTciLCAiaG9zdCI6ICJnY3AtZXVyb3BlLXdlc3QyIn0.IsX6ukFYqTicJyzzfi5TNdRQq_o-5SyLw0GFAXIRBCI",
+    "version": "1.1.7"
+}
